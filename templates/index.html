@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAgri AI — Crop Recommendation & Farm Profit Analysis</title>
+    <meta name="description" content="AI-powered agricultural decision-support tool for crop recommendation, soil health analysis, weather insights, and farm profit estimation.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">🌱</span>
+                <span class="logo-text">SmartAgri <span class="logo-accent">AI</span></span>
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#analyze" class="nav-link">Analyze</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="#analyze" class="btn btn-primary btn-sm">
+                    <i data-lucide="sprout"></i> Analyze Farm
+                </a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-bg-shapes">
+                <div class="sun-glow"></div>
+                <div class="leaf-particle p1">🍃</div>
+                <div class="leaf-particle p2">🌿</div>
+                <div class="leaf-particle p3">🌾</div>
+            </div>
+            
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge hero-badge">
+                        <i data-lucide="sparkles"></i> Next-Gen Precision Agriculture AI
+                    </div>
+                    <h1 class="hero-title">Smarter Farming Starts With Better Decisions.</h1>
+                    <p class="hero-description">
+                        SmartAgri AI combines artificial intelligence, soil insights, weather analysis, and farm economics to help identify suitable crops and understand their potential requirements and returns.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#analyze" class="btn btn-primary btn-lg">
+                            <i data-lucide="calculator"></i> Analyze My Farm
+                        </a>
+                        <a href="#how-it-works" class="btn btn-outline btn-lg">
+                            Explore How It Works <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">99.3%</span>
+                            <span class="stat-label">Model Accuracy</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">22+</span>
+                            <span class="stat-label">Supported Crops</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">7</span>
+                            <span class="stat-label">Soil & Weather Inputs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-card shadow-lg">
+                        <div class="hero-card-header">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                            <span class="hero-card-title">Live AI Decision Matrix</span>
+                        </div>
+                        <div class="hero-card-body">
+                            <div class="hero-preview-row">
+                                <div class="preview-metric">
+                                    <span class="pm-icon text-green"><i data-lucide="leaf"></i></span>
+                                    <div>
+                                        <div class="pm-label">Best Match</div>
+                                        <div class="pm-value text-green">Rice (Paddy)</div>
+                                    </div>
+                                </div>
+                                <div class="preview-badge success">82% Suitability</div>
+                            </div>
+                            <div class="hero-preview-row">
+                                <div class="preview-metric">
+                                    <span class="pm-icon text-amber"><i data-lucide="sun"></i></span>
+                                    <div>
+                                        <div class="pm-label">Soil Health</div>
+                                        <div class="pm-value">Optimal N-P-K</div>
+                                    </div>
+                                </div>
+                                <div class="preview-badge info">Balanced</div>
+                            </div>
+                            <div class="hero-preview-row">
+                                <div class="preview-metric">
+                                    <span class="pm-icon text-blue"><i data-lucide="coins"></i></span>
+                                    <div>
+                                        <div class="pm-label">Est. Revenue</div>
+                                        <div class="pm-value">₹57,500 / acre</div>
+                                    </div>
+                                </div>
+                                <div class="preview-badge primary">+ ₹22,500 Profit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">SYSTEM PIPELINE</span>
+                    <h2 class="section-title">How SmartAgri AI Works</h2>
+                    <p class="section-desc">Our multi-stage intelligence pipeline transforms soil and weather data into actionable farm profit insights.</p>
+                </div>
+
+                <div class="pipeline-grid">
+                    <div class="pipeline-card">
+                        <div class="step-num">01</div>
+                        <div class="pipeline-icon"><i data-lucide="flask-conical"></i></div>
+                        <h3>Farm Data</h3>
+                        <p>Enter 7 soil nutrient (N, P, K, pH) and weather parameters (Temp, Humidity, Rain).</p>
+                    </div>
+                    <div class="pipeline-arrow"><i data-lucide="chevron-right"></i></div>
+
+                    <div class="pipeline-card">
+                        <div class="step-num">02</div>
+                        <div class="pipeline-icon"><i data-lucide="brain"></i></div>
+                        <h3>AI Classifier</h3>
+                        <p>Random Forest Machine Learning model calculates exact probability distributions.</p>
+                    </div>
+                    <div class="pipeline-arrow"><i data-lucide="chevron-right"></i></div>
+
+                    <div class="pipeline-card">
+                        <div class="step-num">03</div>
+                        <div class="pipeline-icon"><i data-lucide="award"></i></div>
+                        <h3>Crop Ranking</h3>
+                        <p>Evaluates and displays Top 3 suitable crops ranked by suitability percentage.</p>
+                    </div>
+                    <div class="pipeline-arrow"><i data-lucide="chevron-right"></i></div>
+
+                    <div class="pipeline-card">
+                        <div class="step-num">04</div>
+                        <div class="pipeline-icon"><i data-lucide="droplets"></i></div>
+                        <h3>Resource Insights</h3>
+                        <p>Generates tailored fertilizer guidance, water needs, and soil status reports.</p>
+                    </div>
+                    <div class="pipeline-arrow"><i data-lucide="chevron-right"></i></div>
+
+                    <div class="pipeline-card">
+                        <div class="step-num">05</div>
+                        <div class="pipeline-icon"><i data-lucide="trending-up"></i></div>
+                        <h3>Farm Economics</h3>
+                        <p>Matches crop yield, prices, and costs to compute estimated revenue & profit/acre.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analyze Farm Section (Main Form) -->
+        <section class="analyze-section" id="analyze">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">PRECISION ANALYSIS</span>
+                    <h2 class="section-title">Analyze Your Farm</h2>
+                    <p class="section-desc">Enter your soil and weather conditions to discover suitable crops and receive intelligent agricultural insights.</p>
+                </div>
+
+                <!-- Sample Presets quick fill buttons -->
+                <div class="preset-container">
+                    <span class="preset-title"><i data-lucide="sparkles"></i> Try Sample Data Presets:</span>
+                    <div class="preset-buttons" id="presetButtons">
+                        <button type="button" class="btn btn-preset" data-preset="rice_monsoon">🌾 Rice / Monsoon</button>
+                        <button type="button" class="btn btn-preset" data-preset="wheat_winter">🌱 Chickpea / Winter</button>
+                        <button type="button" class="btn btn-preset" data-preset="cotton_cash">☁️ Cotton / Black Soil</button>
+                        <button type="button" class="btn btn-preset" data-preset="apple_temperate">🍎 Apple / Hilly</button>
+                    </div>
+                </div>
+
+                <div class="form-wrapper shadow-xl">
+                    <form id="farmForm" novalidate>
+                        
+                        <div class="form-grid">
+                            
+                            <!-- Nitrogen Input -->
+                            <div class="form-group">
+                                <label for="N" class="form-label">
+                                    <i data-lucide="leaf" class="input-icon text-green"></i> Nitrogen (N)
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="number" step="0.1" min="0" max="250" id="N" name="N" class="form-control" placeholder="e.g. 90" required>
+                                    <span class="input-unit">mg/kg</span>
+                                </div>
+                                <span class="input-help">Ratio of Nitrogen content in soil (0 - 250)</span>
+                                <div class="error-msg" id="err-N"></div>
+                            </div>
+
+                            <!-- Phosphorus Input -->
+                            <div class="form-group">
+                                <label for="P" class="form-label">
+                                    <i data-lucide="sprout" class="input-icon text-amber"></i> Phosphorus (P)
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="number" step="0.1" min="0" max="250" id="P" name="P" class="form-control" placeholder="e.g. 42" required>
+                                    <span class="input-unit">mg/kg</span>
+                                </div>
+                                <span class="input-help">Ratio of Phosphorus content in soil (0 - 250)</span>
+                                <div class="error-msg" id="err-P"></div>
+                            </div>
+
+                            <!-- Potassium Input -->
+                            <div class="form-group">
+                                <label for="K" class="form-label">
+                                    <i data-lucide="shield-check" class="input-icon text-emerald"></i> Potassium (K)
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="number" step="0.1" min="0" max="250" id="K" name="K" class="form-control" placeholder="e.g. 43" required>
+                                    <span class="input-unit">mg/kg</span>
+                                </div>
+                                <span class="input-help">Ratio of Potassium content in soil (0 - 250)</span>
+                                <div class="error-msg" id="err-K"></div>
+                            </div>
+
+                            <!-- Temperature Input -->
+                            <div class="form-group">
+                                <label for="temperature" class="form-label">
+                                    <i data-lucide="thermometer" class="input-icon text-red"></i> Temperature
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="number" step="0.1" min="-10" max="60" id="temperature" name="temperature" class="form-control" placeholder="e.g. 23.6" required>
+                                    <span class="input-unit">°C</span>
+                                </div>
+                                <span class="input-help">Average ambient temperature in Celsius (-10 to 60°C)</span>
+                                <div class="error-msg" id="err-temperature"></div>
+                            </div>
+
+                            <!-- Humidity Input -->
+                            <div class="form-group">
+                                <label for="humidity" class="form-label">
+                                    <i data-lucide="cloud-sun" class="input-icon text-sky"></i> Relative Humidity
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="number" step="0.1" min="0" max="100" id="humidity" name="humidity" class="form-control" placeholder="e.g. 82.0" required>
+                                    <span class="input-unit">%</span>
+                                </div>
+                                <span class="input-help">Relative humidity percentage (0 - 100%)</span>
+                                <div class="error-msg" id="err-humidity"></div>
+                            </div>
+
+                            <!-- pH Input -->
+                            <div class="form-group">
+                                <label for="ph" class="form-label">
+                                    <i data-lucide="gauge" class="input-icon text-purple"></i> Soil pH Level
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="number" step="0.1" min="0" max="14" id="ph" name="ph" class="form-control" placeholder="e.g. 6.5" required>
+                                    <span class="input-unit">pH</span>
+                                </div>
+                                <span class="input-help">Soil pH value scale (0.0 to 14.0)</span>
+                                <div class="error-msg" id="err-ph"></div>
+                            </div>
+
+                            <!-- Rainfall Input -->
+                            <div class="form-group form-group-full">
+                                <label for="rainfall" class="form-label">
+                                    <i data-lucide="cloud-rain" class="input-icon text-blue"></i> Seasonal Rainfall
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="number" step="0.1" min="0" max="1000" id="rainfall" name="rainfall" class="form-control" placeholder="e.g. 202.9" required>
+                                    <span class="input-unit">mm</span>
+                                </div>
+                                <span class="input-help">Annual or seasonal rainfall volume in mm (0 - 1000 mm)</span>
+                                <div class="error-msg" id="err-rainfall"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-submit-container">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnAnalyze">
+                                <span>Analyze Farm</span> <i data-lucide="arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Modal / Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-card shadow-2xl">
+                <div class="loading-sprout">🌱</div>
+                <h3 class="loading-title">Analyzing Your Farm</h3>
+                <div class="loading-status" id="loadingStatusText">Reading soil conditions...</div>
+                <div class="loading-progress-bar">
+                    <div class="loading-progress-fill" id="loadingFill"></div>
+                </div>
+                <p class="loading-subtext">Connecting to trained Random Forest model & economic engines...</p>
+            </div>
+        </div>
+
+        <!-- Results Dashboard Section (Hidden until prediction runs) -->
+        <section class="results-section hidden" id="resultsSection">
+            <div class="container">
+                
+                <div class="results-header shadow-sm">
+                    <div class="rh-left">
+                        <div class="rh-badge"><i data-lucide="check-circle2"></i> Analysis Complete</div>
+                        <h2 class="rh-title">Your SmartAgri Farm Report</h2>
+                        <p class="rh-subtitle">Derived from Random Forest ML Classification & Regional Crop Economics</p>
+                    </div>
+                    <div class="rh-right">
+                        <button type="button" class="btn btn-outline btn-sm" id="btnRecalculate">
+                            <i data-lucide="rotate-ccw"></i> Recalculate Inputs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Executive Summary Cards Grid -->
+                <div class="summary-cards-grid">
+                    
+                    <div class="summary-card shadow-sm border-left-primary">
+                        <div class="sc-icon text-green"><i data-lucide="award"></i></div>
+                        <div class="sc-info">
+                            <span class="sc-label">Recommended Crop</span>
+                            <h3 class="sc-value text-green" id="resBestCropName">--</h3>
+                            <span class="sc-sub text-muted" id="resBestCropCat">--</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-card shadow-sm border-left-accent">
+                        <div class="sc-icon text-amber"><i data-lucide="percent"></i></div>
+                        <div class="sc-info">
+                            <span class="sc-label">AI Confidence</span>
+                            <h3 class="sc-value text-amber" id="resConfidenceVal">--%</h3>
+                            <span class="sc-sub text-muted">Suitability Score</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-card shadow-sm border-left-info">
+                        <div class="sc-icon text-sky"><i data-lucide="heart-pulse"></i></div>
+                        <div class="sc-info">
+                            <span class="sc-label">Soil Health</span>
+                            <h3 class="sc-value" id="resSoilHealthVal">--</h3>
+                            <span class="sc-sub text-muted" id="resSoilHealthSub">--</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-card shadow-sm border-left-success">
+                        <div class="sc-icon text-emerald"><i data-lucide="trending-up"></i></div>
+                        <div class="sc-info">
+                            <span class="sc-label">Est. Profit / Acre</span>
+                            <h3 class="sc-value text-emerald" id="resProfitVal">₹--</h3>
+                            <span class="sc-sub text-muted" id="resRevenueVal">Est. Rev: ₹--</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Top 3 Crop Recommendations Grid -->
+                <div class="dashboard-row">
+                    <div class="card shadow-md flex-2">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="trophy" class="text-amber"></i> Top 3 Crop Recommendations</h3>
+                            <span class="card-badge">ML Model Probabilities</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="top3-grid" id="top3Container">
+                                <!-- Dynamically injected Top 3 Crop Cards -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-md flex-1">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="pie-chart" class="text-green"></i> Suitability Chart</h3>
+                        </div>
+                        <div class="card-body chart-card-body">
+                            <canvas id="suitabilityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Confidence Component & Notice -->
+                <div class="disclaimer-banner shadow-sm margin-bottom-lg">
+                    <div class="db-icon"><i data-lucide="shield-alert" class="text-amber"></i></div>
+                    <div class="db-content">
+                        <strong>AI Confidence & Suitability Notice:</strong>
+                        <span id="resConfidenceNotice">Model probability represents environmental statistical alignment, not a guaranteed biological crop yield guarantee.</span>
+                    </div>
+                </div>
+
+                <!-- Decision Support Cards (2 Column Layout) -->
+                <div class="dashboard-grid-2">
+                    
+                    <!-- Soil Health & Nutrient Card -->
+                    <div class="card shadow-md">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="flask-conical" class="text-green"></i> Soil Health Analysis</h3>
+                            <span class="badge" id="badgeSoilStatus">Healthy</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-lead" id="soilSummaryText">--</p>
+                            <div class="soil-breakdown-grid">
+                                <div class="sb-item">
+                                    <span class="sb-label">Nitrogen (N)</span>
+                                    <span class="sb-value" id="valSoilN">--</span>
+                                    <span class="sb-badge" id="badgeSoilN">--</span>
+                                </div>
+                                <div class="sb-item">
+                                    <span class="sb-label">Phosphorus (P)</span>
+                                    <span class="sb-value" id="valSoilP">--</span>
+                                    <span class="sb-badge" id="badgeSoilP">--</span>
+                                </div>
+                                <div class="sb-item">
+                                    <span class="sb-label">Potassium (K)</span>
+                                    <span class="sb-value" id="valSoilK">--</span>
+                                    <span class="sb-badge" id="badgeSoilK">--</span>
+                                </div>
+                                <div class="sb-item">
+                                    <span class="sb-label">Soil pH</span>
+                                    <span class="sb-value" id="valSoilPH">--</span>
+                                    <span class="sb-badge" id="badgeSoilPH">--</span>
+                                </div>
+                            </div>
+                            <div class="card-footer-note">
+                                <small class="text-muted"><i data-lucide="info"></i> Classified against standard project nutrient & pH threshold tables.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fertilizer Guidance Card -->
+                    <div class="card shadow-md">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="sprout" class="text-emerald"></i> Fertilizer Guidance</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="fertilizer-list" id="fertilizerList">
+                                <!-- Injected items -->
+                            </ul>
+                            <div class="card-footer-note">
+                                <small class="text-muted"><i data-lucide="alert-triangle"></i> General project-level nutrient suggestions. Consult local agronomists before chemical application.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Water Requirement Card -->
+                    <div class="card shadow-md">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="droplet" class="text-blue"></i> Water Requirement</h3>
+                        </div>
+                        <div class="card-body water-card-body">
+                            <div class="water-badge-wrapper">
+                                <div class="water-droplet-icon" id="waterDropletIcon"><i data-lucide="droplets"></i></div>
+                                <div class="water-level-display" id="waterLevelDisplay">HIGH</div>
+                                <div class="water-desc" id="waterDescText">Optimal for water-intensive flooded or well-irrigated field management.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather Analysis Card -->
+                    <div class="card shadow-md">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="cloud-sun" class="text-sky"></i> Weather Intelligence</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-lead" id="weatherSummaryText">--</p>
+                            <div class="weather-metrics">
+                                <div class="wm-chip">
+                                    <i data-lucide="thermometer" class="text-red"></i>
+                                    <span>Temp: <strong id="wmTemp">-- °C</strong></span>
+                                </div>
+                                <div class="wm-chip">
+                                    <i data-lucide="cloud" class="text-sky"></i>
+                                    <span>Humidity: <strong id="wmHumidity">-- %</strong></span>
+                                </div>
+                                <div class="wm-chip">
+                                    <i data-lucide="cloud-rain" class="text-blue"></i>
+                                    <span>Rain: <strong id="wmRainfall">-- mm</strong></span>
+                                </div>
+                            </div>
+                            <div class="weather-risk-box margin-top-md" id="weatherRiskText">
+                                --
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alternative Crop Card -->
+                    <div class="card shadow-md">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="git-branch" class="text-purple"></i> Recommended Alternative Crop</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="alt-crop-row">
+                                <div class="alt-icon" id="altCropIcon">🌽</div>
+                                <div>
+                                    <h4 class="alt-name" id="altCropName">Maize</h4>
+                                    <span class="badge secondary" id="altCropSuitability">10% Suitability</span>
+                                </div>
+                            </div>
+                            <p class="alt-reason margin-top-sm" id="altCropReason">--</p>
+                            <div class="alt-details margin-top-sm">
+                                <div><strong>Water Need:</strong> <span id="altCropWater">--</span></div>
+                                <div><strong>Est. Profit:</strong> <span id="altCropProfit" class="text-green">--</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agronomic Information Card -->
+                    <div class="card shadow-md">
+                        <div class="card-header">
+                            <h3 class="card-title"><i data-lucide="book-open" class="text-green"></i> Crop Profile Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-list">
+                                <div class="pl-row">
+                                    <span class="pl-key">Category:</span>
+                                    <span class="pl-val" id="cropCategory">--</span>
+                                </div>
+                                <div class="pl-row">
+                                    <span class="pl-key">Growing Season:</span>
+                                    <span class="pl-val" id="cropSeason">--</span>
+                                </div>
+                                <div class="pl-row">
+                                    <span class="pl-key">Growth Duration:</span>
+                                    <span class="pl-val" id="cropDuration">--</span>
+                                </div>
+                                <div class="pl-row">
+                                    <span class="pl-key">Optimal pH Range:</span>
+                                    <span class="pl-val" id="cropIdealPH">--</span>
+                                </div>
+                                <div class="pl-row">
+                                    <span class="pl-key">Optimal Temp Range:</span>
+                                    <span class="pl-val" id="cropIdealTemp">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Economic & Profit Analysis Section -->
+                <div class="card shadow-lg margin-top-lg border-primary">
+                    <div class="card-header bg-light-green">
+                        <h3 class="card-title"><i data-lucide="coins" class="text-green"></i> Farm Economics & Profit Breakdown</h3>
+                        <span class="badge info">Per Acre Estimates</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="econ-grid">
+                            
+                            <div class="econ-metrics-side">
+                                <div class="econ-metric-box">
+                                    <span class="em-label">Expected Yield</span>
+                                    <div class="em-value" id="econYield">25 quintals/acre</div>
+                                </div>
+                                <div class="econ-metric-box">
+                                    <span class="em-label">Market Price / Quintal</span>
+                                    <div class="em-value text-sky" id="econPrice">₹2,300</div>
+                                </div>
+                                <div class="econ-metric-box">
+                                    <span class="em-label">Cultivation Cost</span>
+                                    <div class="em-value text-red" id="econCost">₹35,000</div>
+                                </div>
+                                <div class="econ-metric-box">
+                                    <span class="em-label">Gross Revenue</span>
+                                    <div class="em-value text-blue" id="econRevenue">₹57,500</div>
+                                </div>
+                                <div class="econ-metric-box highlight">
+                                    <span class="em-label">Estimated Net Profit</span>
+                                    <div class="em-value text-emerald" id="econNetProfit">₹22,500 / acre</div>
+                                </div>
+                            </div>
+
+                            <div class="econ-chart-side">
+                                <h4>Financial Comparison (₹ per acre)</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="economicsChart"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Smart Recommendation Card -->
+                <div class="card shadow-lg margin-top-lg smart-rec-card">
+                    <div class="card-header bg-dark-green text-white">
+                        <h3 class="card-title text-white"><i data-lucide="sparkles"></i> Smart Recommendation Summary</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="smart-rec-text" id="smartRecText">
+                            --
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mandated Project Disclaimer Footer Callout -->
+                <div class="project-disclaimer shadow-sm margin-top-lg">
+                    <div class="pd-header">
+                        <i data-lucide="alert-triangle" class="text-amber"></i> <strong>Academic Project Disclaimer & Limitations</strong>
+                    </div>
+                    <p class="pd-text">
+                        <strong>Important:</strong> AI confidence represents model probability and is not a guarantee of crop success. Economic values are project/demo values and may not represent current market prices. Actual farm profit can vary due to labor, transportation, pests, weather losses, subsidies and market conditions.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Features & About Section -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">PROJECT HIGHLIGHTS</span>
+                    <h2 class="section-title">Key Architectural Features</h2>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card shadow-sm">
+                        <div class="fc-icon text-green"><i data-lucide="tree-deciduous"></i></div>
+                        <h3>Random Forest ML</h3>
+                        <p>Trained on multi-dimensional soil & climate records achieving 99.3% prediction accuracy.</p>
+                    </div>
+
+                    <div class="feature-card shadow-sm">
+                        <div class="fc-icon text-amber"><i data-lucide="pie-chart"></i></div>
+                        <h3>Real Top-3 Ranking</h3>
+                        <p>Utilizes sklearn `predict_proba()` to present accurate confidence scores without hardcoding.</p>
+                    </div>
+
+                    <div class="feature-card shadow-sm">
+                        <div class="fc-icon text-blue"><i data-lucide="calculator"></i></div>
+                        <h3>Decoupled Economics</h3>
+                        <p>Separates ML suitability classification from revenue and cost formulas using real CSV data.</p>
+                    </div>
+
+                    <div class="feature-card shadow-sm">
+                        <div class="fc-icon text-purple"><i data-lucide="shield-check"></i></div>
+                        <h3>Domain Validation</h3>
+                        <p>Comprehensive client-side & server-side numeric range enforcement for data integrity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-card shadow-md">
+                    <div class="about-content">
+                        <span class="section-subtitle">ACADEMIC & FINAL-YEAR DEMONSTRATION</span>
+                        <h2>About SmartAgri AI</h2>
+                        <p>
+                            SmartAgri AI is an intelligent agricultural decision-support application built for college final-year project demonstration. It unifies machine learning crop prediction with soil health diagnosis, fertilizer management, weather risk interpretation, and farm financial decision support into a cohesive web experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-left">
+                <a href="#" class="footer-logo">
+                    <span>🌱</span> SmartAgri <strong>AI</strong>
+                </a>
+                <p>Intelligent Crop Recommendation & Farm Profit Analysis System</p>
+            </div>
+            <div class="footer-right">
+                <p>&copy; 2026 SmartAgri AI — Built for Academic Project Demonstration.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
