@@ -18,17 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile Navigation Toggle
     if (mobileToggle && navLinks) {
-        mobileToggle.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '4.5rem';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.backgroundColor = '#FFFFFF';
-                navLinks.style.padding = '1.5rem';
-                navLinks.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+        mobileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile nav when clicking any nav link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
+                navLinks.classList.remove('open');
             }
         });
     }
